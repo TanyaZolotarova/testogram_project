@@ -6,6 +6,8 @@ export function generatePhoto(photoData) {
   likesEl.textContent = photoData.likes;
   const commentsEl = template.querySelector('.picture__comments');
   commentsEl.textContent = photoData.comments.length;
+  const imgLinkEl = template.querySelector('.picture');
+  imgLinkEl.dataset.id = photoData.id;
 
   return template;
 }
