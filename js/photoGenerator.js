@@ -15,7 +15,7 @@ function generateComment(id) {
 }
 
 function generateComments() {
-  return new Array(getRandomNumber(0, 5))
+  return new Array(getRandomNumber(0, 20))
     .fill(null)
     .map(() => generateComment(getRandomNumber(1, 500)));
 }
