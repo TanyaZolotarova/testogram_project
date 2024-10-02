@@ -1,6 +1,7 @@
 import {generatePhotosArray} from './photoGenerator.js';
 import {renderPhoto} from './photoRender.js'
 import {showBigPicture} from './fullPhotoView.js';
+import {openForm} from "./formValidation.js";
 
 const photosArray = generatePhotosArray(25);
 renderPhoto(photosArray);
@@ -13,4 +14,10 @@ picturesContainer.addEventListener('click', (evt) => {
     const selectedPhoto = photosArray.find(photo => photo.id === Number(pictureId));
     showBigPicture(selectedPhoto);
   }
+});
+
+const fileInput = document.querySelector('#upload-file');
+
+fileInput.addEventListener('change', () => {
+  openForm();
 });
