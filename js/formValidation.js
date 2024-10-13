@@ -1,9 +1,14 @@
+import {toggleSliderVisibility} from './effectsControl.js';
+import {isScaleControlInitialized} from './scaleControls.js'
+
 const form = document.querySelector('.img-upload__form');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 const fileInput = document.querySelector('#upload-file');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const closeBtn = document.querySelector('#upload-cancel');
+export const scaleValueInput = document.querySelector('.scale__control--value');
+export const imagePreview = document.querySelector('.img-upload__preview img');
 
 const maxHashtag = 5;
 const maxHashtagLength = 20;
@@ -21,6 +26,9 @@ const errorMessages = {
 export function openForm() {
   uploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
+
+  const selectedEffect = document.querySelector('.effects__radio:checked').value;
+  toggleSliderVisibility(selectedEffect);
 }
 
 function closeForm() {
@@ -30,9 +38,18 @@ function closeForm() {
   fileInput.value = '';
   hashtagsInput.setCustomValidity('');
   descriptionInput.setCustomValidity('');
+  imagePreview.className = '';
+  imagePreview.style.filter = '';
+  scaleValueInput.value = '100%';
+  imagePreview.style.transform = 'scale(1)';
+
+  isScaleControlInitialized = false;
+
+  document.querySelector('#effect-none').checked = true;
 }
 
 closeBtn.addEventListener('click', closeForm);
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && document.activeElement !== hashtagsInput && document.activeElement !== descriptionInput) {
     closeForm();
